@@ -28,11 +28,30 @@ router.get('/blogs/:id?', async (req, res) => {
 
 router.post('/blogs/add', async (req, res) => {
     try{
-        console.log(req.body);
         await db.Blogs.addpost(req.body);
         res.sendStatus(200);
     } catch (e) {
         console.log(e);
+        res.sendStatus(500);
+    }
+})
+
+router.put('/blogs/change/:id', async (req, res) => {
+    try {
+        await db.Blogs.changepost(req.params.id, req.body);
+        res.sendStatus(200);
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
+})
+
+router.delete('/blogs/delete/:id', async (req, res) => {
+    try {
+        await db.Blogs.remove(req.params.id);
+        res.sendStatus(200);
+    } catch (error) {
+        console.log(error);
         res.sendStatus(500);
     }
 })
