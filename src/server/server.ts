@@ -3,6 +3,8 @@ import * as express from 'express';
 import apiRouter from './routes';
 
 const app = express();
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
 
 let p = path.join(__dirname, '../public');
 console.log(p);
