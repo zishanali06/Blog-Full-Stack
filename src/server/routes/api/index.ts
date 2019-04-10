@@ -28,8 +28,8 @@ router.get('/blogs/:id?', async (req, res) => {
 
 router.post('/blogs/add', async (req, res) => {
     try{
-        let blogid = await db.Blogs.addpost(req.params.body);
-        console.log(blogid);
+        console.log(req.body);
+        await db.Blogs.addpost(req.body);
         res.sendStatus(200);
     } catch (e) {
         console.log(e);

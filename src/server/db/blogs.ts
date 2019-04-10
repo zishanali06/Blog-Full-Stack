@@ -10,7 +10,7 @@ const addpost = async (post: {
     tagid: number
 }) => {
     console.log(post);
-    Query(`insert into blogs (title, content, authorid) values (${post.title}, ${post.content}, 1)`);
+    Query(`insert into blogs (title, content, authorid) values (?)`, [post.title, post.content, 1]);
 }
 
 export default {
