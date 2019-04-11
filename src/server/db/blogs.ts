@@ -9,8 +9,8 @@ const addpost = async (post: {
     content: string,
     tagid: number
 }) => {
-    let r = await Query(`insert into blogs (title, content, authorid) values (?)`, [post.title, post.content, 1]);
-    Query(`insert into blogtags (blogid, tagid) values (?)`, [r.insertId, post.tagid]);
+    let {insertId}: any = await Query(`insert into blogs (title, content, authorid) values (?)`, [post.title, post.content, 1]);
+    Query(`insert into blogtags (blogid, tagid) values (?)`, [insertId, post.tagid]);
 }
 
 const changepost = async (id: number, post: {title: string, content: string}) => {
@@ -26,7 +26,7 @@ const getTags = async (id: number) => {
     await Query(`call spBlogTags(${id})`);
 }
 
-const allTags = async () => Query('select * from tags');
+const allTags = async () => Query('select name from tags');
 
 export default {
     all,

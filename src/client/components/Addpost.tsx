@@ -5,15 +5,19 @@ export default class Addpost extends React.Component<AddpostProps, AddpostState>
         super(props)
         this.state = {
             title: "",
-            tag: 0,
+            tag: 1,
             content: "",
             tagarray: []
         }
     }
 
-    // async componentDidMount() {
-    //     let r = fetch('/api/blog')
-    // }
+    async componentDidMount() {
+        let r = await fetch('/api/blogs/alltags');
+        let data = await r.json();
+        let newarray = Object.keys(data).map(key => data[key].name);
+        console.log(newarray);
+        this.setState({ tagarray: newarray });
+    }
 
     handleTitle = (e) => {
         this.setState({ title: e.target.value })
@@ -21,6 +25,10 @@ export default class Addpost extends React.Component<AddpostProps, AddpostState>
 
     handleContent = (e) => {
         this.setState({ content: e.target.value })
+    }
+
+    handleTag = (e) => {
+        this.setState({ tag: e.target.value })
     }
 
     render() {
@@ -38,12 +46,11 @@ export default class Addpost extends React.Component<AddpostProps, AddpostState>
                         </section>
                         <section className="form-group">
                             <label htmlFor="exampleFormControlSelect1">Tag</label>
-                            <select className="form-control" id="exampleFormControlSelect1">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                            <select className="form-control" id="exampleFormControlSelect1" value={this.state.tag} onChange={this.handleTag}>
+                                {this.state.tagarray.map((tag, index) => {
+                                    index = index + 1;
+                                    return <option value={index} key={index}>{tag}</option>
+                                })}
                             </select>
                         </section>
                         <section className="form-group">
@@ -66,5 +73,5 @@ interface AddpostState {
     title: string,
     tag: number,
     content: string,
-    tagarray: []
+    tagarray: any[]
 }
