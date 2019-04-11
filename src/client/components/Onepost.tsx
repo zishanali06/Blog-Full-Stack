@@ -39,7 +39,10 @@ export default class Onepost extends React.Component<IOnepostProps, IOnepostStat
                             <h5 className="card-title">{this.state.post.title}</h5>
                             <h6 className="card-subtitle mb-2 text-muted">Author: {this.state.post.author}</h6>
                             <p className="card-text">{this.state.post.content}</p>
-                            <a href="#" className="card-link">Card link</a>
+                            <Link to={{
+                            pathname: '/blog/edit',
+                            state: this.state.post
+                        }} className="card-link">Edit Post</Link><Link to='/' className="card-link">Go back</Link>
                         </div>
                     </div>
                 </section>

@@ -1,22 +1,18 @@
 import * as React from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 
-export default class Addpost extends React.Component<AddpostProps, AddpostState>{
-    constructor(props: AddpostProps) {
+export default class Changepost extends React.Component<ChangepostProps, ChangepostState>{
+    constructor(props: ChangepostProps) {
         super(props)
         this.state = {
-            title: "",
+            title: this.props.location.state.title,
             tag: '1',
-            content: "",
-            tagarray: []
+            content: this.props.location.state.content
         }
     }
 
     async componentDidMount() {
-        let r = await fetch('/api/blogs/alltags');
-        let data = await r.json();
-        let newarray = Object.keys(data).map(key => data[key].name);
-        console.log(newarray);
-        this.setState({ tagarray: newarray });
+        
     }
 
     handleTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,8 +23,26 @@ export default class Addpost extends React.Component<AddpostProps, AddpostState>
         this.setState({ content: e.target.value })
     }
 
-    handleTag = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        this.setState({ tag: e.target.value })
+    handleClick = (e: React.MouseEvent) => {
+        e.preventDefault()
+        let addpost = {
+            title: this.state.title, 
+            content: this.state.content
+        };
+        fetch(`/api/blogs/change/${this.props.location.state.id}`, {
+            method: "PUT",
+            mode: "cors",
+            cache: "no-cache",
+            credentials: "same-origin",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            redirect: "follow",
+            referrer: "no-referrer",
+            body: JSON.stringify(addpost)
+        }).then(() => this.props.history.push(`/blog/${this.props.location.state.id}`))
+        .catch(e => console.log(e));
+
     }
 
     render() {
@@ -42,21 +56,13 @@ export default class Addpost extends React.Component<AddpostProps, AddpostState>
                     <form>
                         <section className="form-group">
                             <label htmlFor="exampleFormControlInput1">Title</label>
-                            <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="Title" value={this.state.title} onChange={this.handleTitle} />
-                        </section>
-                        <section className="form-group">
-                            <label htmlFor="exampleFormControlSelect1">Tag</label>
-                            <select className="form-control" id="exampleFormControlSelect1" value={this.state.tag} onChange={this.handleTag}>
-                                {this.state.tagarray.map((tag, index) => {
-                                    index = index + 1;
-                                    return <option value={index} key={index}>{tag}</option>
-                                })}
-                            </select>
+                            <input type="email" className="form-control" id="exampleFormControlInput1" placeholder={this.state.title} value={this.state.title} onChange={this.handleTitle} />
                         </section>
                         <section className="form-group">
                             <label htmlFor="exampleFormControlTextarea1">Content</label>
                             <textarea className="form-control" id="exampleFormControlTextarea1" rows={3} value={this.state.content} onChange={this.handleContent}></textarea>
                         </section>
+                        <button type="submit" className="btn btn-primary" onClick={this.handleClick}>Save Edit</button>
                     </form>
                 </section>
                 <section className="col-2"></section>
@@ -65,13 +71,12 @@ export default class Addpost extends React.Component<AddpostProps, AddpostState>
     }
 }
 
-interface AddpostProps {
+interface ChangepostProps extends RouteComponentProps {
 
 }
 
-interface AddpostState {
+interface ChangepostState {
     title: string,
     tag: string,
-    content: string,
-    tagarray: any[]
+    content: string
 }

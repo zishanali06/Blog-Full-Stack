@@ -5,6 +5,7 @@ import './scss/app';
 import Blog from './components/Blog';
 import Onepost from './components/Onepost';
 import Addpost from './components/Addpost';
+import Changepost from './components/Changepost';
 
 export default class App extends React.Component<IAppProps, IAppState> {
 
@@ -23,10 +24,6 @@ export default class App extends React.Component<IAppProps, IAppState> {
     }
 
     async componentWillMount() {
-        let r = await fetch('/api/hello');
-        let name = await r.json();
-        this.setState({ name })
-
         let r1 = await fetch('/api/blogs');
         let name1 = await r1.json();
         this.setState({ blogposts: name1 });
@@ -55,6 +52,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
                     <Switch>
                         <Route exact path='/' component={Blog}></Route>
                         <Route exact path='/blog/add' component={Addpost}></Route>
+                        <Route exact path='/blog/edit' component={Changepost}></Route>
                         <Route exact path='/blog/:id' component={Onepost}></Route>
                     </Switch>
                 </main>
