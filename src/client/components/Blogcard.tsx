@@ -1,18 +1,10 @@
 import * as React from 'react';
-import blogs from '../../server/db/blogs';
+import { Link } from 'react-router-dom';
+
 
 export default class Blogcard extends React.Component<IBlogcardProps, IBlogcardState>{
     constructor(props: IBlogcardProps) {
         super(props)
-        this.state = {
-            blogposts: [{
-                id: null,
-                title: null,
-                content: null,
-                authorid: null,
-                _created: null
-            }]
-        };
     }
 
     render() {
@@ -28,7 +20,7 @@ export default class Blogcard extends React.Component<IBlogcardProps, IBlogcardS
                     <div className="card-body">
                         <h5 className="card-title">{this.props.post.title}</h5>
                         <p className="card-text">{this.props.post.content}</p>
-                        <a href="#" className="btn btn-primary">View Post</a>
+                        <Link to={`/blog/${this.props.post.id}`} className="btn btn-primary">View Post</Link>
                     </div>
                 </div>
             </section>
@@ -47,11 +39,5 @@ interface IBlogcardProps {
 }
 
 interface IBlogcardState {
-    blogposts: [{
-        id: number,
-        title: string,
-        content: string,
-        authorid: number,
-        _created: string
-    }];
+
 }

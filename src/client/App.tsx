@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Link, Route } from 'react-router-dom';
 
 import './scss/app';
 import Blog from './components/Blog';
+import Onepost from './components/Onepost';
 
 export default class App extends React.Component<IAppProps, IAppState> {
 
@@ -39,6 +40,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
                     </nav>
                     <Switch>
                         <Route exact path='/' component={Blog}></Route>
+                        <Route exact path='/blog/:id' component={Onepost}></Route>
                     </Switch>
                 </main>
             </Router>
