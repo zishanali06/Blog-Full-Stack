@@ -1,19 +1,23 @@
 import * as React from 'react';
+import { BrowserRouter as Router, Switch, Link, Route } from 'react-router-dom';
 
 import './scss/app';
+import Blog from './components/Blog';
 
 export default class App extends React.Component<IAppProps, IAppState> {
 
     constructor(props: IAppProps) {
         super(props);
 
-        this.state = { name: null, blogposts: [{
-            id: null,
-            title: null,
-            content: null,
-            authorid: null,
-            _created: null
-        }] };
+        this.state = {
+            name: null, blogposts: [{
+                id: null,
+                title: null,
+                content: null,
+                authorid: null,
+                _created: null
+            }]
+        };
     }
 
     async componentWillMount() {
@@ -26,15 +30,18 @@ export default class App extends React.Component<IAppProps, IAppState> {
         this.setState({ blogposts: name1 });
     }
 
-    render () {
+    render() {
         return (
-            <main className="container">
-                <h1 className="covalence-blue">Hello Zishan!</h1>
-                <h2></h2>
-                {this.state.blogposts.map((blog) => {
-                    return <h3 key={blog.id}>{blog.title}</h3>
-                })}
-            </main>
+            <Router>
+                <main className="container">
+                    <nav className="navbar navbar-light nav-bar">
+                        <span className="navbar-brand mb-0 h1">Best Blog Ever</span>
+                    </nav>
+                    <Switch>
+                        <Route exact path='/' component={Blog}></Route>
+                    </Switch>
+                </main>
+            </Router>
         )
     }
 }
