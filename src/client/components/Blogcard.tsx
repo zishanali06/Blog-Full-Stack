@@ -33,7 +33,7 @@ interface IBlogcardProps {
         id: number,
         title: string,
         content: string,
-        authorid: number,
+        author: string,
         _created: string
     }
 }

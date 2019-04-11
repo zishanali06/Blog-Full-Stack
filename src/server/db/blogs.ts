@@ -2,7 +2,7 @@ import { Query } from './index';
 
 const all = async () => Query('select * from blogs');
 
-const one = async (id: number) => Query('select * from blogs where id=?', [id]);
+const one = async (id: number) => Query('select blogs.id, blogs.title, blogs.content, authors.name as author, blogs._created from blogs join authors on authors.id = blogs.authorid where blogs.id=?', [id]);
 
 const addpost = async (post: {
     title: string,
@@ -22,10 +22,15 @@ const remove = async (id: number) => {
     Query(`delete from blogs where id=${id}`);
 }
 
+const getTags = async (id: number) => {
+    await Query(`call spBlogTags(${id})`);
+}
+
 export default {
     all,
     one,
     addpost,
     changepost,
-    remove
+    remove,
+    getTags
 }

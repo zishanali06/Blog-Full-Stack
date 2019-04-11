@@ -11,7 +11,7 @@ export default class Blog extends React.Component<IBlogProps, IBlogState> {
                 id: null,
                 title: null,
                 content: null,
-                authorid: null,
+                author: null,
                 _created: null
             }]
         };
@@ -48,7 +48,7 @@ interface IBlogState {
         id: number,
         title: string,
         content: string,
-        authorid: number,
+        author: string,
         _created: string
     }];
 }

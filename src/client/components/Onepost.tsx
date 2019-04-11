@@ -11,7 +11,7 @@ export default class Onepost extends React.Component<IOnepostProps, IOnepostStat
                 id: null,
                 title: '',
                 content: '',
-                authorid: null,
+                author: null,
                 _created: null
             }
         }
@@ -37,7 +37,9 @@ export default class Onepost extends React.Component<IOnepostProps, IOnepostStat
                     <div className="card">
                         <div className="card-body">
                             <h5 className="card-title">{this.state.post.title}</h5>
+                            <h6 className="card-subtitle mb-2 text-muted">Author: {this.state.post.author}</h6>
                             <p className="card-text">{this.state.post.content}</p>
+                            <a href="#" className="card-link">Card link</a>
                         </div>
                     </div>
                 </section>
@@ -56,7 +58,7 @@ interface IOnepostState {
         id: number;
         title: string;
         content: string;
-        authorid: number;
+        author: string;
         _created: string;
     }
 }

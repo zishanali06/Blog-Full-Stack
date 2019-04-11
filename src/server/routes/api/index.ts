@@ -56,4 +56,13 @@ router.delete('/blogs/delete/:id', async (req, res) => {
     }
 })
 
+router.get('/blogs/:id/tags', async (req, res) => {
+    try {
+        res.json(await db.Blogs.getTags(req.params.id));
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
+})
+
 export default router;
