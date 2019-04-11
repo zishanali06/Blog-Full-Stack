@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 
 export default class Addpost extends React.Component<AddpostProps, AddpostState>{
     constructor(props: AddpostProps) {
@@ -31,6 +32,28 @@ export default class Addpost extends React.Component<AddpostProps, AddpostState>
         this.setState({ tag: e.target.value })
     }
 
+    handleClick = (e: React.MouseEvent) => {
+        e.preventDefault();
+        let newpost = {
+            title: this.state.title,
+            content: this.state.content,
+            tagid: this.state.tag
+        }
+        fetch('/api/blogs/add', {
+            method: "POST",
+            mode: "cors",
+            cache: "no-cache",
+            credentials: "same-origin",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            redirect: "follow",
+            referrer: "no-referrer",
+            body: JSON.stringify(newpost)
+        }).then(() => this.props.history.push('/'))
+        .catch(e => console.log(e));
+    }
+
     render() {
         return (
             <section className="row">
@@ -57,6 +80,7 @@ export default class Addpost extends React.Component<AddpostProps, AddpostState>
                             <label htmlFor="exampleFormControlTextarea1">Content</label>
                             <textarea className="form-control" id="exampleFormControlTextarea1" rows={3} value={this.state.content} onChange={this.handleContent}></textarea>
                         </section>
+                        <button type="submit" className="btn btn-primary" onClick={this.handleClick}>Save Edit</button>
                     </form>
                 </section>
                 <section className="col-2"></section>
@@ -65,7 +89,7 @@ export default class Addpost extends React.Component<AddpostProps, AddpostState>
     }
 }
 
-interface AddpostProps {
+interface AddpostProps extends RouteComponentProps {
 
 }
 
