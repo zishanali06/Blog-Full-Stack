@@ -67,4 +67,13 @@ router.get('/blogs/:id/tags', async (req, res) => {
     }
 })
 
+router.get('/blogs/alltags', async (req, res) => {
+    try {
+        res.json(await db.Blogs.allTags());
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(500);
+    }
+})
+
 export default router;

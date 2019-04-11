@@ -26,11 +26,14 @@ const getTags = async (id: number) => {
     await Query(`call spBlogTags(${id})`);
 }
 
+const allTags = async () => Query('select * from tags');
+
 export default {
     all,
     one,
     addpost,
     changepost,
     remove,
-    getTags
+    getTags,
+    allTags
 }

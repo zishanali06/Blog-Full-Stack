@@ -37,14 +37,14 @@ export default class App extends React.Component<IAppProps, IAppState> {
             <Router>
                 <main className="container">
                     <nav className="navbar navbar-expand-lg navbar-dark bg-primary nav-bar">
-                        <a className="navbar-brand" href="#">Zishan's Blog</a>
+                        <Link to="/" className="navbar-brand">Zishan's Blog</Link>
                         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
                         <div className="collapse navbar-collapse" id="navbarNavDropdown">
                             <ul className="navbar-nav">
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#">Home</a>
+                                    <Link to='/' className="nav-link">Home</Link>
                                 </li>
                                 <li className="nav-item">
                                     <Link to='/blog/add' className="nav-link">Add Blog Post</Link>
@@ -54,8 +54,8 @@ export default class App extends React.Component<IAppProps, IAppState> {
                     </nav>
                     <Switch>
                         <Route exact path='/' component={Blog}></Route>
-                        <Route exact path='/blog/:id' component={Onepost}></Route>
                         <Route exact path='/blog/add' component={Addpost}></Route>
+                        <Route exact path='/blog/:id' component={Onepost}></Route>
                     </Switch>
                 </main>
             </Router>

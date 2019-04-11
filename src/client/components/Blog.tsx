@@ -17,7 +17,7 @@ export default class Blog extends React.Component<IBlogProps, IBlogState> {
         };
     }
 
-    async componentWillMount() {
+    async componentDidMount() {
         let r = await fetch('/api/blogs');
         let blogposts = await r.json();
         this.setState({ blogposts });
