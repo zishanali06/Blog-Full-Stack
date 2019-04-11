@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Link, Route } from 'react-router-dom';
 import './scss/app';
 import Blog from './components/Blog';
 import Onepost from './components/Onepost';
+import Addpost from './components/Addpost';
 
 export default class App extends React.Component<IAppProps, IAppState> {
 
@@ -46,7 +47,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
                                     <a className="nav-link" href="#">Home</a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#">Add Blog Post</a>
+                                    <Link to='/blog/add' className="nav-link">Add Blog Post</Link>
                                 </li>
                             </ul>
                         </div>
@@ -54,6 +55,7 @@ export default class App extends React.Component<IAppProps, IAppState> {
                     <Switch>
                         <Route exact path='/' component={Blog}></Route>
                         <Route exact path='/blog/:id' component={Onepost}></Route>
+                        <Route exact path='/blog/add' component={Addpost}></Route>
                     </Switch>
                 </main>
             </Router>
