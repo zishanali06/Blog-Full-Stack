@@ -6,9 +6,7 @@ const router = express.Router();
 //get tags for specific post
 router.get('/blogs/tags/:id', async (req, res) => {
     try {
-        let r = await db.Blogs.getTags(req.params.id);
-        console.log(r);
-        res.json(r);
+        res.json(await db.Blogs.getTags(req.params.id));
     } catch (error) {
         console.log(error);
         res.sendStatus(500);

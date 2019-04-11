@@ -22,8 +22,8 @@ const remove = async (id: number) => {
     Query(`delete from blogs where id=${id}`);
 }
 
-const getTags = async (id: number) => {
-    await Query(`call spBlogTags(${id})`);
+const getTags = (id: number) => {
+    return Query(`call spBlogTags(${id})`);
 }
 
 const allTags = async () => Query('select name from tags');
