@@ -58,7 +58,9 @@ router.delete('/blogs/delete/:id', async (req, res) => {
 
 router.get('/blogs/:id/tags', async (req, res) => {
     try {
-        res.json(await db.Blogs.getTags(req.params.id));
+        let r = await db.Blogs.getTags(req.params.id);
+        console.log(r);
+        res.json(r);
     } catch (error) {
         console.log(error);
         res.sendStatus(500);
