@@ -13,6 +13,7 @@ const addpost = async (post: {
     Query(`insert into blogtags (blogid, tagid) values (?)`, [insertId, post.tagid]);
 }
 
+//changepost
 const changepost = async (id: number, post: {title: string, content: string}) => {
     Query(`update blogs set title = "${post.title}", content ="${post.content}" where id=${id}`);
 }
