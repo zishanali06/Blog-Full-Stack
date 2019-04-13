@@ -18,6 +18,7 @@ export default class Onepost extends React.Component<IOnepostProps, IOnepostStat
         }
     }
 
+    //when mounted
     async componentWillMount() {
         let r = await fetch(`/api/blogs/${this.props.match.params.id}`);
         let post = await r.json();
