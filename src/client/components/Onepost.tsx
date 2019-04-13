@@ -31,6 +31,7 @@ export default class Onepost extends React.Component<IOnepostProps, IOnepostStat
         this.setState({ tags: getags })
     }
 
+    //render to screen
     render() {
         return (
             <section className="row">
@@ -43,8 +44,8 @@ export default class Onepost extends React.Component<IOnepostProps, IOnepostStat
                         <div className="card-body">
                             <h5 className="card-title">{this.state.post.title}</h5>
                             <h6 className="card-subtitle mb-2 text-muted">Author: {this.state.post.author}</h6>
-                            {this.state.tags.map(tag => {
-                                return <h6 className="card-subtitle ml-3 px-1 d-inline tag">{tag}</h6>
+                            {this.state.tags.map((tag, i) => {
+                                return <h6 className="card-subtitle ml-3 px-1 d-inline tag" key={i}>{tag}</h6>
                             })}
                             <hr/>
                             <p className="card-text">{this.state.post.content}</p>
