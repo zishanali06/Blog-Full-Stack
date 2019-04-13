@@ -18,6 +18,7 @@ const changepost = async (id: number, post: {title: string, content: string}) =>
     Query(`update blogs set title = "${post.title}", content ="${post.content}" where id=${id}`);
 }
 
+//remove
 const remove = async (id: number) => {
     await Query(`delete from blogtags where blogid=${id}`);
     Query(`delete from blogs where id=${id}`);
