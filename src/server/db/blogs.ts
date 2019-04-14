@@ -30,6 +30,8 @@ const getTags = (id: number) => {
 
 const allTags = async () => Query('select name from tags');
 
+const all333: any = 0;
+
 export default {
     all,
     one,
